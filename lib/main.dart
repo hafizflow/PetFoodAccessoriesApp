@@ -7,7 +7,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,6 +22,30 @@ class PetFoodAccessoriesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            Text('Hello World'),
+            SizedBox(
+              height: 240,
+              child: CarouselView(
+                itemExtent: MediaQuery.sizeOf(context).width,
+                itemSnapping: true,
+                children: List.generate(10, (int index) {
+                  return Container(
+                    color: Colors.grey,
+                    child: Image.network(
+                      'https://picsum.photos/400?random=$index',
+                      fit: BoxFit.cover,
+                    ),
+                  );
+                }),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

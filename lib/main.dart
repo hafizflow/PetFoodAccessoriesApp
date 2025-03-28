@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pet_food_accessories_app/custom_appbar.dart';
+import 'package:pet_food_accessories_app/custom_carousel.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,29 +24,14 @@ class PetFoodAccessoriesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            Text('Hello World'),
-            SizedBox(
-              height: 240,
-              child: CarouselView(
-                itemExtent: MediaQuery.sizeOf(context).width,
-                itemSnapping: true,
-                children: List.generate(10, (int index) {
-                  return Container(
-                    color: Colors.grey,
-                    child: Image.network(
-                      'https://picsum.photos/400?random=$index',
-                      fit: BoxFit.cover,
-                    ),
-                  );
-                }),
-              ),
-            ),
-          ],
-        ),
+    return Scaffold(
+      appBar: CustomAppBar(),
+      body: Column(
+        children: [
+          const SizedBox(height: 16),
+          CustomCarousel(),
+          const SizedBox(height: 10),
+        ],
       ),
     );
   }

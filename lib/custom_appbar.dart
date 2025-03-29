@@ -38,7 +38,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   color: Colors.grey.withAlpha(350),
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                 ),
-                child: const Icon(
+                child: Icon(
                   FontAwesomeIcons.bell,
                   color: Colors.white,
                   size: 24,

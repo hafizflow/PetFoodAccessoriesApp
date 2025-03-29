@@ -25,7 +25,7 @@ class _CustomCarouselState extends State<CustomCarousel> {
             autoPlayInterval: const Duration(seconds: 4),
             autoPlayAnimationDuration: const Duration(milliseconds: 800),
             enlargeCenterPage: true,
-            viewportFraction: 0.9,
+            viewportFraction: 1,
             autoPlayCurve: Curves.fastOutSlowIn,
             onPageChanged: (index, reason) {
               setState(() {

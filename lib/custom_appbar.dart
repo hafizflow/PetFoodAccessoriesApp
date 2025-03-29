@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -31,17 +32,24 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               const Spacer(),
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: Colors.grey.withAlpha(350),
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
+              badges.Badge(
+                badgeContent: const Text(
+                  '1',
+                  style: TextStyle(color: Colors.white),
                 ),
-                child: Icon(
-                  FontAwesomeIcons.bell,
-                  color: Colors.white,
-                  size: 24,
+                position: badges.BadgePosition.topEnd(end: -6, top: -9),
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withAlpha(350),
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                  ),
+                  child: Icon(
+                    FontAwesomeIcons.bell,
+                    color: Colors.white,
+                    size: 24,
+                  ),
                 ),
               ),
             ],
@@ -81,5 +89,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(130); // Match toolbarHeight
+  Size get preferredSize => const Size.fromHeight(130);
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
-import 'package:pet_food_accessories_app/constant.dart';
+import 'package:pet_food_accessories_app/core/constant.dart';
 
-class FloatingBottomNavBar extends StatelessWidget {
+class HBottomNavBar extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onItemTapped;
 
-  const FloatingBottomNavBar({
+  const HBottomNavBar({
     super.key,
     required this.selectedIndex,
     required this.onItemTapped,

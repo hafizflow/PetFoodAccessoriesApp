@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomCategorySection extends StatelessWidget {
-  const CustomCategorySection({super.key});
+class HCategory extends StatelessWidget {
+  const HCategory({super.key});
 
   @override
   Widget build(BuildContext context) {

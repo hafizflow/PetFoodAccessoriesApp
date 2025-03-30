@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomHeading extends StatelessWidget {
-  const CustomHeading({super.key, required this.title, this.isSeeAll = true});
+class HHeading extends StatelessWidget {
+  const HHeading({super.key, required this.title, this.isSeeAll = true});
   final String title;
   final bool isSeeAll;
 

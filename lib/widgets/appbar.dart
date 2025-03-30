@@ -3,8 +3,8 @@ import 'package:badges/badges.dart' as badges;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+class HAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const HAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +33,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               const Spacer(),
               badges.Badge(
-                badgeContent: const Text(
+                badgeContent: Text(
                   '1',
-                  style: TextStyle(color: Colors.white),
+                  style: GoogleFonts.quicksand(color: Colors.white),
                 ),
                 position: badges.BadgePosition.topEnd(end: -6, top: -9),
                 child: Container(

@@ -1,62 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:pet_food_accessories_app/custom_appbar.dart';
-import 'package:pet_food_accessories_app/custom_bottom_nav.dart';
-import 'package:pet_food_accessories_app/custom_carousel.dart';
-import 'package:pet_food_accessories_app/custom_category.dart';
-import 'package:pet_food_accessories_app/custom_heading.dart';
-import 'package:pet_food_accessories_app/prduct_card.dart';
+import 'package:pet_food_accessories_app/product_detail_page.dart';
+import 'package:pet_food_accessories_app/providers/bottom_nav_provider.dart';
+import 'package:pet_food_accessories_app/views/home_page.dart';
+import 'package:pet_food_accessories_app/widgets/bottom_nav.dart';
+import 'package:provider/provider.dart';
 
-class PetFoodAccessoriesApp extends StatefulWidget {
+class PetFoodAccessoriesApp extends StatelessWidget {
   const PetFoodAccessoriesApp({super.key});
 
-  @override
-  State<PetFoodAccessoriesApp> createState() => _PetFoodAccessoriesAppState();
-}
-
-class _PetFoodAccessoriesAppState extends State<PetFoodAccessoriesApp> {
-  int selectedIndex = 0;
-
-  void onNavItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-  }
+  static final List<Widget> pages = [
+    const HomePage(),
+    ProductDetailPage(),
+    // const Center(child: Text('Favorites')),
+    const Center(child: Text('Cart')),
+    const Center(child: Text('Profile')),
+  ];
 
   @override
   Widget build(BuildContext context) {
+    final bottomNavProvider = Provider.of<BottomNavProvider>(context);
+
     return Scaffold(
-      appBar: CustomAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 16),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 16,
-            children: [
-              CustomHeading(title: 'Special Offers', isSeeAll: false),
-              CustomCarousel(),
-              CustomHeading(title: 'Categories', isSeeAll: false),
-              const CustomCategorySection(),
-              CustomHeading(title: 'Best Sellers'),
-              GridView.count(
-                crossAxisCount: 2,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                childAspectRatio: 0.7,
-                crossAxisSpacing: 24,
-                mainAxisSpacing: 16,
-                children: List.generate(8, (index) {
-                  return const ProductCard();
-                }),
-              ),
-              // ProductCard(),
-            ],
-          ),
-        ),
+      body: IndexedStack(
+        index: bottomNavProvider.selectedIndex,
+        children: pages,
       ),
-      bottomNavigationBar: FloatingBottomNavBar(
-        selectedIndex: selectedIndex,
-        onItemTapped: onNavItemTapped,
+      bottomNavigationBar: HBottomNavBar(
+        selectedIndex: bottomNavProvider.selectedIndex,
+        onItemTapped: bottomNavProvider.updateIndex,
       ),
     );
   }

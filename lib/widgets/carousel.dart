@@ -3,14 +3,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class CustomCarousel extends StatefulWidget {
-  const CustomCarousel({super.key});
+class HCarousel extends StatefulWidget {
+  const HCarousel({super.key});
 
   @override
-  State<CustomCarousel> createState() => _CustomCarouselState();
+  State<HCarousel> createState() => _HCarouselState();
 }
 
-class _CustomCarouselState extends State<CustomCarousel> {
+class _HCarouselState extends State<HCarousel> {
   int _currentIndex = 0;
 
   @override

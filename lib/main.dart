@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:pet_food_accessories_app/app.dart';
+import 'package:pet_food_accessories_app/providers/bottom_nav_provider.dart';
+import 'package:pet_food_accessories_app/providers/product_detail_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => BottomNavProvider()),
+        ChangeNotifierProvider(create: (_) => ProductDetailProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

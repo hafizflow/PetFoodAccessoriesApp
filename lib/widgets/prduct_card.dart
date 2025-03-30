@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:like_button/like_button.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key});
@@ -8,7 +9,6 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: 200,
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -36,22 +36,7 @@ class ProductCard extends StatelessWidget {
                   child: Image.asset("assets/hii.png", fit: BoxFit.cover),
                 ),
               ),
-              Positioned(
-                top: 8,
-                right: 8,
-                child: Container(
-                  padding: const EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                    size: 20,
-                  ),
-                ),
-              ),
+              Positioned(top: 8, right: 6, child: LikeButton(size: 24)),
             ],
           ),
           const SizedBox(height: 8),

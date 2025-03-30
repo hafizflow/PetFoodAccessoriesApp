@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_food_accessories_app/routers/app_routers.dart';
 import 'package:pet_food_accessories_app/widgets/appbar.dart';
 import 'package:pet_food_accessories_app/widgets/carousel.dart';
 import 'package:pet_food_accessories_app/widgets/category.dart';
@@ -42,7 +43,12 @@ class _HomePageState extends State<HomePage> {
                   mainAxisSpacing: 16,
                 ),
                 itemBuilder: (BuildContext context, int index) {
-                  return const ProductCard();
+                  return InkWell(
+                    child: const ProductCard(),
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes.productDetail);
+                    },
+                  );
                 },
               ),
             ],

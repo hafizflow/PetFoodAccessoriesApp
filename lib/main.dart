@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pet_food_accessories_app/app.dart';
 import 'package:pet_food_accessories_app/providers/bottom_nav_provider.dart';
 import 'package:pet_food_accessories_app/providers/product_detail_provider.dart';
+import 'package:pet_food_accessories_app/routers/route_generator.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Pet Food & Accessories App',
       home: const PetFoodAccessoriesApp(),
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }

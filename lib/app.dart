@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pet_food_accessories_app/product_detail_page.dart';
 import 'package:pet_food_accessories_app/providers/bottom_nav_provider.dart';
 import 'package:pet_food_accessories_app/views/home_page.dart';
 import 'package:pet_food_accessories_app/widgets/bottom_nav.dart';
@@ -10,8 +9,8 @@ class PetFoodAccessoriesApp extends StatelessWidget {
 
   static final List<Widget> pages = [
     const HomePage(),
-    ProductDetailPage(),
-    // const Center(child: Text('Favorites')),
+    // ProductDetailPage(),
+    const Center(child: Text('Favorites')),
     const Center(child: Text('Cart')),
     const Center(child: Text('Profile')),
   ];

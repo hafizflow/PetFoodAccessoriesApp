@@ -21,6 +21,12 @@ dependencies:
   badges: ^3.1.2
   like_button: ^2.0.5
   provider:
+  google_maps_flutter: 2.10.0
+  custom_info_window: ^1.0.1
+
+dependency_overrides:
+  google_maps_flutter_ios: 2.13.1
+  google_maps_flutter_web: ^0.5.12
 
 dev_dependencies:
   flutter_test:

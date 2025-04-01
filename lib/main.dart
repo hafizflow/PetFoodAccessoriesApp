@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pet_food_accessories_app/app.dart';
 import 'package:pet_food_accessories_app/providers/bottom_nav_provider.dart';
+import 'package:pet_food_accessories_app/providers/login_provider.dart';
 import 'package:pet_food_accessories_app/providers/product_detail_provider.dart';
+import 'package:pet_food_accessories_app/providers/signup_provider.dart';
 import 'package:pet_food_accessories_app/routers/route_generator.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +13,8 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => BottomNavProvider()),
         ChangeNotifierProvider(create: (_) => ProductDetailProvider()),
+        ChangeNotifierProvider(create: (_) => SignUpProvider()),
+        ChangeNotifierProvider(create: (_) => LoginProvider()),
       ],
       child: const MyApp(),
     ),

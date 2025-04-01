@@ -13,9 +13,9 @@ class ProductDetailPage extends StatelessWidget {
 
     return Scaffold(
       bottomNavigationBar: SizedBox(
-        height: 80,
+        height: MediaQuery.of(context).size.height * 0.11,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Row(
             children: [
               Column(
@@ -23,7 +23,7 @@ class ProductDetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Total Price',
+                    'Price',
                     style: GoogleFonts.quicksand(
                       fontSize: 16,
                       color: Colors.grey[500],
@@ -85,7 +85,7 @@ class ProductDetailPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16),
                     ),
                     height: MediaQuery.of(context).size.height * 0.45,
-                    margin: const EdgeInsets.symmetric(horizontal: 24),
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
                     width: double.infinity,
                     child: Column(
                       children: [
@@ -149,7 +149,7 @@ class ProductDetailPage extends StatelessWidget {
                   // Back Button
                   Positioned(
                     top: 10,
-                    left: 36,
+                    left: 32,
                     child: InkWell(
                       onTap: () => Navigator.pop(context),
                       child: CircleAvatar(
@@ -167,7 +167,7 @@ class ProductDetailPage extends StatelessWidget {
                   // Share Button
                   Positioned(
                     top: 10,
-                    right: 36,
+                    right: 32,
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
                       child: InkWell(
@@ -185,7 +185,7 @@ class ProductDetailPage extends StatelessWidget {
                   // Heart Button
                   Positioned(
                     top: 10,
-                    right: 92,
+                    right: 82,
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
                       child: InkWell(
@@ -206,7 +206,7 @@ class ProductDetailPage extends StatelessWidget {
 
             //! Product Details
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

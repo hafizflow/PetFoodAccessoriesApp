@@ -34,8 +34,9 @@ class HBottomNavBar extends StatelessWidget {
           children: [
             buildNavItem(icon: Iconsax.home_1, index: 0),
             buildNavItem(icon: Iconsax.heart, index: 1),
-            buildNavItem(icon: Iconsax.shopping_bag, index: 2),
-            buildNavItem(icon: Iconsax.user, index: 3),
+            buildNavItem(icon: Iconsax.location, index: 2),
+            buildNavItem(icon: Iconsax.shopping_bag, index: 3),
+            buildNavItem(icon: Iconsax.user, index: 4),
           ],
         ),
       ),

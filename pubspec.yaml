@@ -23,6 +23,9 @@ dependencies:
   provider:
   google_maps_flutter: 2.10.0
   custom_info_window: ^1.0.1
+  image_picker: ^1.1.2
+  scratcher: ^2.5.0
+  panara_dialogs: ^0.1.5
 
 dependency_overrides:
   google_maps_flutter_ios: 2.13.1

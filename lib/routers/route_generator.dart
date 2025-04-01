@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pet_food_accessories_app/views/home_page.dart';
 import 'package:pet_food_accessories_app/views/login_page.dart';
 import 'package:pet_food_accessories_app/views/product_detail_page.dart';
-import 'package:pet_food_accessories_app/views/profile_page.dart';
 import 'package:pet_food_accessories_app/views/signup_page.dart';
 
 class RouteGenerator {

@@ -4,6 +4,7 @@ import 'package:pet_food_accessories_app/views/cart_page.dart';
 import 'package:pet_food_accessories_app/views/home_page.dart';
 import 'package:pet_food_accessories_app/views/login_page.dart';
 import 'package:pet_food_accessories_app/views/pet_shop_location.dart';
+import 'package:pet_food_accessories_app/views/profile_page.dart';
 import 'package:pet_food_accessories_app/views/wish_list_page.dart';
 import 'package:pet_food_accessories_app/widgets/bottom_nav.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +17,8 @@ class PetFoodAccessoriesApp extends StatelessWidget {
     WishListPage(),
     PetShopLocation(),
     CartPage(),
-    RiveLoginPage(),
+    ProfilePage(),
+    // RiveLoginPage(),
   ];
 
   @override

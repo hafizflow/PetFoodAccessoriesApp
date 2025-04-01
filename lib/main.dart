@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_food_accessories_app/app.dart';
 import 'package:pet_food_accessories_app/providers/bottom_nav_provider.dart';
@@ -16,7 +17,15 @@ void main() {
         ChangeNotifierProvider(create: (_) => SignUpProvider()),
         ChangeNotifierProvider(create: (_) => LoginProvider()),
       ],
-      child: const MyApp(),
+
+      child: DevicePreview(
+        enabled: true,
+        storage: DevicePreviewStorage.none(),
+        builder: (context) {
+          return const MyApp();
+        },
+      ),
+      // child: const MyApp(),
     ),
   );
 }

@@ -37,10 +37,9 @@ class _HomePageState extends State<HomePage> {
                 itemCount: 4,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio:
-                      MediaQuery.of(context).size.width * 0.39 / 250,
                   crossAxisSpacing: 24,
                   mainAxisSpacing: 16,
+                  mainAxisExtent: 260,
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(

@@ -27,13 +27,15 @@ class WishListPage extends StatelessWidget {
         child: GridView.builder(
           // physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
+
           padding: const EdgeInsets.only(bottom: 16),
           itemCount: 8,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: MediaQuery.of(context).size.width * 0.40 / 250,
+            childAspectRatio: 150 / 220,
             crossAxisSpacing: 24,
             mainAxisSpacing: 16,
+            mainAxisExtent: 260,
           ),
           itemBuilder: (BuildContext context, int index) {
             return InkWell(

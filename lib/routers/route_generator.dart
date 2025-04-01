@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_food_accessories_app/views/checkout_page.dart';
 import 'package:pet_food_accessories_app/views/home_page.dart';
 import 'package:pet_food_accessories_app/views/login_page.dart';
 import 'package:pet_food_accessories_app/views/product_detail_page.dart';
@@ -18,6 +19,9 @@ class RouteGenerator {
 
       case '/login':
         return MaterialPageRoute(builder: (_) => const RiveLoginPage());
+
+      case '/checkout':
+        return MaterialPageRoute(builder: (_) => const CheckoutPage());
 
       default:
         return _errorRoute();

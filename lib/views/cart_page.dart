@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_food_accessories_app/routers/app_routers.dart';
 import 'package:pet_food_accessories_app/widgets/cart_item.dart';
 
 class CartPage extends StatelessWidget {
@@ -24,6 +25,7 @@ class CartPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
         child: ListView.separated(
+          shrinkWrap: true,
           itemBuilder: (context, index) {
             return Dismissible(
               direction: DismissDirection.endToStart,
@@ -75,24 +77,27 @@ class CartPage extends StatelessWidget {
               ),
               const SizedBox(width: 24),
               Flexible(
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.teal,
-                    borderRadius: BorderRadius.circular(32),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Proceed to Checkout',
-                        style: GoogleFonts.quicksand(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
+                child: InkWell(
+                  onTap: () => Navigator.pushNamed(context, AppRoutes.checkout),
+                  child: Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Colors.teal,
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Proceed to Checkout',
+                          style: GoogleFonts.quicksand(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

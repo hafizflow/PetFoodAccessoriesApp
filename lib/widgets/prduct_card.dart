@@ -46,6 +46,7 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
                       width: 80,
@@ -59,7 +60,6 @@ class ProductCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    const Spacer(),
                     Row(
                       children: [
                         const Icon(Iconsax.star, color: Colors.amber, size: 16),
@@ -92,6 +92,7 @@ class ProductCard extends StatelessWidget {
               ],
             ),
           ),
+
           // const SizedBox(height: 8),
         ],
       ),

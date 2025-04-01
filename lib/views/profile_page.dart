@@ -11,6 +11,8 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController address = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -45,7 +47,7 @@ class ProfilePage extends StatelessWidget {
               titleFontSize: 20,
             ),
             SizedBox(height: 18),
-            profileInformation(context),
+            profileInformation(context, address),
             Divider(color: Colors.grey[300], thickness: 1, height: 50),
             HHeading(
               title: 'Other Information',
@@ -145,7 +147,10 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Column profileInformation(BuildContext context) {
+  Column profileInformation(
+    BuildContext context,
+    TextEditingController address,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -232,15 +237,137 @@ class ProfilePage extends StatelessWidget {
                   context: context,
                   builder: (context) {
                     return Container(
-                      color: Colors.white,
-                      height: 200,
-                      child: Center(
-                        child: Text(
-                          'Change Address',
-                          style: GoogleFonts.quicksand(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                          ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                        ),
+                      ),
+                      height: 230,
+                      child: Padding(
+                        padding: EdgeInsets.all(24.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            HHeading(
+                              title: 'Change Address',
+                              isSeeAll: false,
+                              titleFontSize: 20,
+                            ),
+                            SizedBox(height: 16),
+                            TextFormField(
+                              controller: address,
+                              style: const TextStyle(fontSize: 15),
+                              cursorColor: Colors.teal,
+                              keyboardType: TextInputType.emailAddress,
+                              textInputAction: TextInputAction.next,
+                              decoration: InputDecoration(
+                                prefixIcon: const Icon(
+                                  Iconsax.safe_home,
+                                  color: Colors.teal,
+                                ),
+                                hintText: "Enter your delivery address",
+                                hintStyle: GoogleFonts.quicksand(
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                filled: true,
+                                fillColor: Colors.grey[200],
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                focusColor: Colors.teal,
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Colors.teal,
+                                  ),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter a valid address";
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 24),
+                            Row(
+                              children: [
+                                Flexible(
+                                  child: InkWell(
+                                    onTap: () => Navigator.pop(context),
+                                    child: Container(
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(32),
+                                        border: Border.all(
+                                          color: Colors.grey,
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Cancel',
+                                            style: GoogleFonts.quicksand(
+                                              color: Colors.black,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 24),
+                                Flexible(
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Address changed successfully',
+                                            style: GoogleFonts.quicksand(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          duration: const Duration(seconds: 2),
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: Colors.teal,
+                                        borderRadius: BorderRadius.circular(32),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Save',
+                                            style: GoogleFonts.quicksand(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     );
@@ -255,10 +382,10 @@ class ProfilePage extends StatelessWidget {
                 decoration: BoxDecoration(
                   // color: Colors.teal[100],
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.teal, width: 1),
+                  border: Border.all(color: Colors.grey, width: 1),
                 ),
                 child: Text(
-                  'Change',
+                  'CHANGE',
                   style: GoogleFonts.quicksand(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem({super.key});
+  const CartItem({super.key, this.isCountVisible = true});
+
+  final bool isCountVisible;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.13,
+      height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -20,20 +22,22 @@ class CartItem extends StatelessWidget {
         ],
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.13,
+            height: MediaQuery.of(context).size.height * 0.15,
             width: MediaQuery.of(context).size.width * 0.3,
             decoration: BoxDecoration(
               color: Colors.grey[200],
+              border: Border.all(color: Colors.grey[300]!),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16),
                 bottomLeft: Radius.circular(16),
               ),
             ),
             child: Center(
-              child: Image.asset("assets/hii.png", fit: BoxFit.cover),
+              child: Image.asset("assets/1.png", fit: BoxFit.cover),
             ),
           ),
           const SizedBox(width: 16),
@@ -41,75 +45,57 @@ class CartItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Column(
-                spacing: 8,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "NutriNosh Dog Food",
-                    style: GoogleFonts.quicksand(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    "Dog Food",
-                    style: GoogleFonts.quicksand(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey[600],
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                spacing: MediaQuery.of(context).size.width * 0.16,
-                children: [
-                  Text(
-                    "\$25.00",
-                    style: GoogleFonts.quicksand(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.teal,
-                    ),
-                  ),
+              itemNameCategory(context),
 
-                  Row(
-                    children: [
-                      Container(
-                        height: 30,
-                        width: 30,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Icon(Icons.remove, size: 16),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 50,
+                    child: Text(
+                      "\$5.0",
+                      style: GoogleFonts.quicksand(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal,
                       ),
-                      const SizedBox(width: 8),
-                      Text(
-                        "1",
-                        style: GoogleFonts.quicksand(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Container(
-                        height: 30,
-                        width: 30,
-                        decoration: BoxDecoration(
-                          color: Colors.teal[100],
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Icon(Icons.add, size: 16),
-                      ),
-                    ],
+                    ),
                   ),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.1),
+                  if (isCountVisible)
+                    SizedBox(
+                      width: 85,
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 30,
+                            width: 30,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: const Icon(Icons.remove, size: 16),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            "1",
+                            style: GoogleFonts.quicksand(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            height: 30,
+                            width: 30,
+                            decoration: BoxDecoration(
+                              color: Colors.teal[100],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: const Icon(Icons.add, size: 16),
+                          ),
+                        ],
+                      ),
+                    ),
                 ],
               ),
             ],
@@ -118,10 +104,38 @@ class CartItem extends StatelessWidget {
       ),
     );
   }
+
+  Column itemNameCategory(BuildContext context) {
+    return Column(
+      spacing: 8,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.5,
+          child: Text(
+            "NutriNosh Dog Food",
+            style: GoogleFonts.quicksand(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        Text(
+          "Dog Food",
+          style: GoogleFonts.quicksand(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: Colors.grey[600],
+          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
+    );
+  }
 }
-
-
-
 
 // Center(
 //           child: Text(
@@ -129,3 +143,5 @@ class CartItem extends StatelessWidget {
 //             style: GoogleFonts.quicksand(fontSize: 20, color: Colors.grey[700]),
 //           ),
 //         ),
+
+//

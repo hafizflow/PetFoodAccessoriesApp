@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pet_food_accessories_app/providers/bottom_nav_provider.dart';
 import 'package:pet_food_accessories_app/views/cart_page.dart';
 import 'package:pet_food_accessories_app/views/home_page.dart';
-import 'package:pet_food_accessories_app/views/login_page.dart';
+// import 'package:pet_food_accessories_app/views/login_page.dart';
 import 'package:pet_food_accessories_app/views/pet_shop_location.dart';
 import 'package:pet_food_accessories_app/views/profile_page.dart';
 import 'package:pet_food_accessories_app/views/wish_list_page.dart';

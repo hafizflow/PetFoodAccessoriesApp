@@ -6,20 +6,23 @@ class HScratcher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scratcher(
-      brushSize: 30,
-      threshold: 50,
-      color: const Color(0xFF353F48),
-      onChange: (value) {},
-      onThreshold: () {},
-      child: Container(
-        height: 300,
-        width: 300,
-        color: Colors.white,
-        alignment: Alignment.center,
-        child: const Text(
-          'Hafiz5678',
-          style: TextStyle(fontSize: 34, color: Colors.black),
+    return SizedBox(
+      height: 120,
+      child: Scratcher(
+        brushSize: 30,
+        threshold: 50,
+        color: const Color(0xFF353F48),
+        onChange: (value) {},
+        onThreshold: () {},
+        child: Container(
+          height: 300,
+          width: 300,
+          color: Colors.white,
+          alignment: Alignment.center,
+          child: const Text(
+            'Hafiz5678',
+            style: TextStyle(fontSize: 34, color: Colors.black),
+          ),
         ),
       ),
     );

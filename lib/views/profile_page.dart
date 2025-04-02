@@ -76,34 +76,34 @@ class ProfilePage extends StatelessWidget {
                     return AlertDialog(
                       title: Text(
                         'Promo Code',
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.quicksand(
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       content: HScratcher(),
+
                       actions: [
                         InkWell(
                           onTap: () => Navigator.of(context).pop(),
-                          child: Flexible(
-                            child: Container(
-                              height: 50,
-                              decoration: BoxDecoration(
-                                color: Colors.teal,
-                                borderRadius: BorderRadius.circular(32),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Done',
-                                    style: GoogleFonts.quicksand(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.teal,
+                              borderRadius: BorderRadius.circular(32),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Done',
+                                  style: GoogleFonts.quicksand(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -220,7 +220,7 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width - 240,
+              width: MediaQuery.of(context).size.width * 0.3,
               child: Text(
                 'Savar, Dhaka, Bangladesh',
                 overflow: TextOverflow.ellipsis,
@@ -380,7 +380,6 @@ class ProfilePage extends StatelessWidget {
                   vertical: 2,
                 ),
                 decoration: BoxDecoration(
-                  // color: Colors.teal[100],
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(color: Colors.grey, width: 1),
                 ),

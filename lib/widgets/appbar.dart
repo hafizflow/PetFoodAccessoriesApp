@@ -24,7 +24,7 @@ class HAppBar extends StatelessWidget implements PreferredSizeWidget {
           Row(
             children: [
               Text(
-                'Welcome to Pet World',
+                'Welcome to PawMart',
                 style: GoogleFonts.quicksand(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,

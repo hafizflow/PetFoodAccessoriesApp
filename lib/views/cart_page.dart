@@ -66,11 +66,14 @@ class CartPage extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  Text(
-                    '\$300.00',
-                    style: GoogleFonts.quicksand(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800,
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Text(
+                      '\$300.00',
+                      style: GoogleFonts.quicksand(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                   ),
                 ],

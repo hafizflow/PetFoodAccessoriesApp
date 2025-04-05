@@ -12,7 +12,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const HomePage());
 
       case '/product_detail':
-        return MaterialPageRoute(builder: (_) => const ProductDetailPage());
+        int productId = settings.arguments as int;
+        return MaterialPageRoute(
+          builder: (_) => ProductDetailPage(productId: productId),
+        );
 
       case '/signup':
         return MaterialPageRoute(builder: (_) => const RiveSignUpPage());

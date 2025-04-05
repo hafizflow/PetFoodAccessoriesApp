@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
+import 'package:pet_food_accessories_app/routers/app_routers.dart';
 import 'package:pet_food_accessories_app/widgets/heading.dart';
 import 'package:pet_food_accessories_app/widgets/profile_image_picker.dart';
 import 'package:pet_food_accessories_app/widgets/scratcher.dart';
@@ -139,6 +140,26 @@ class ProfilePage extends StatelessWidget {
                   onTapConfirm: () => Navigator.pop(context),
                   panaraDialogType: PanaraDialogType.error,
                 );
+              },
+            ),
+
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: Icon(Iconsax.login_copy),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
+              tileColor: Colors.red[100],
+              title: Text(
+                'Login',
+                style: GoogleFonts.quicksand(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.login);
               },
             ),
           ],

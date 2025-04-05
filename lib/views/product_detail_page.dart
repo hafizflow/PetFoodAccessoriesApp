@@ -5,7 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  const ProductDetailPage({super.key});
+  const ProductDetailPage({super.key, this.productId});
+
+  final int? productId;
 
   @override
   Widget build(BuildContext context) {
@@ -96,14 +98,18 @@ class ProductDetailPage extends StatelessWidget {
                             onPageChanged:
                                 (index) => productProvider.setPage(index),
                             children:
-                                productProvider.images
-                                    .map(
-                                      (image) => Image.asset(
-                                        image,
-                                        fit: BoxFit.contain,
-                                      ),
-                                    )
-                                    .toList(),
+                                productProvider.images.map((image) {
+                                  return productId != null
+                                      ? Hero(
+                                        transitionOnUserGestures: true,
+                                        tag: 'product$productId',
+                                        child: Image.asset(
+                                          image,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      )
+                                      : Image.asset(image, fit: BoxFit.contain);
+                                }).toList(),
                           ),
                         ),
                         // Thumbnails Row

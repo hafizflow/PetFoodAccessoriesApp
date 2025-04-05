@@ -32,16 +32,20 @@ class WishListPage extends StatelessWidget {
           itemCount: 8,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: 150 / 220,
+            // childAspectRatio: 150 / 220,
             crossAxisSpacing: 24,
             mainAxisSpacing: 16,
             mainAxisExtent: 260,
           ),
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
-              child: const ProductCard(),
+              child: ProductCard(),
               onTap: () {
-                Navigator.pushNamed(context, AppRoutes.productDetail);
+                Navigator.pushNamed(
+                  context,
+                  AppRoutes.productDetail,
+                  arguments: index,
+                );
               },
             );
           },

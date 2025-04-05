@@ -43,9 +43,13 @@ class _HomePageState extends State<HomePage> {
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
-                    child: const ProductCard(),
+                    child: ProductCard(index: index),
                     onTap: () {
-                      Navigator.pushNamed(context, AppRoutes.productDetail);
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.productDetail,
+                        arguments: index,
+                      );
                     },
                   );
                 },

@@ -4,7 +4,9 @@ import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:like_button/like_button.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key});
+  const ProductCard({super.key, this.index});
+
+  final int? index;
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +35,19 @@ class ProductCard extends StatelessWidget {
                   color: Colors.grey[200],
                 ),
                 child: Center(
-                  child: Image.asset("assets/hii.png", fit: BoxFit.cover),
+                  child:
+                      index == null
+                          ? Image.asset("assets/hii.png", fit: BoxFit.cover)
+                          : Hero(
+                            tag: 'product$index',
+                            child: Image.asset(
+                              "assets/hii.png",
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                 ),
               ),
+
               Positioned(top: 8, right: 6, child: LikeButton(size: 24)),
             ],
           ),

@@ -1,16 +1,1 @@
-{
-  "hosting": {
-    "public": "build/web",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
-}
+{"hosting":{"public":"build/web","ignore":["firebase.json","**/.*","**/node_modules/**"],"rewrites":[{"source":"**","destination":"/index.html"}]},"flutter":{"platforms":{"android":{"default":{"projectId":"pawmart-32ea2","appId":"1:922429960602:android:1bac32f0004fa393500a23","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"pawmart-32ea2","appId":"1:922429960602:ios:fe546c56b7d98a84500a23","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"pawmart-32ea2","configurations":{"android":"1:922429960602:android:1bac32f0004fa393500a23","ios":"1:922429960602:ios:fe546c56b7d98a84500a23","web":"1:922429960602:web:81a2382cc1c47d97500a23"}}}}}}

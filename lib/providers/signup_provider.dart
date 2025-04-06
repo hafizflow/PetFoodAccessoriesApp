@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpProvider extends ChangeNotifier {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -59,17 +60,39 @@ class SignUpProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void validateForm() {
-    if (formKey.currentState!.validate()) {
-      isChecking?.change(false);
-      isHandsUp?.change(false);
-      trigFail?.change(false);
-      trigSuccess?.change(true);
-    } else {
-      isChecking?.change(false);
-      isHandsUp?.change(false);
+  Future<void> signUpWithEmail(BuildContext context) async {
+    if (!formKey.currentState!.validate()) {
       trigFail?.change(true);
+      return;
+    }
+
+    try {
+      isChecking?.change(true);
+      isHandsUp?.change(false);
       trigSuccess?.change(false);
+      trigFail?.change(false);
+
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
+      // Success animation
+      trigSuccess?.change(true);
+
+      // Optional: Navigate to home or login
+      // Navigator.pushReplacementNamed(context, AppRoutes.home);
+    } on FirebaseAuthException catch (e) {
+      print("Firebase SignUp Error: ${e.code} - ${e.message}");
+      trigFail?.change(true);
+
+      // Optional: Show snackbar
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.message ?? 'Signup failed')));
+    } finally {
+      isChecking?.change(false);
+      isHandsUp?.change(false);
     }
   }
 

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pet_food_accessories_app/widgets/toast.dart';
 import 'package:rive/rive.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:toastification/toastification.dart';
 
 class LoginProvider extends ChangeNotifier {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -58,17 +61,50 @@ class LoginProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void validateForm() {
-    if (formKey.currentState!.validate()) {
-      isChecking?.change(false);
-      isHandsUp?.change(false);
-      trigFail?.change(false);
-      trigSuccess?.change(true);
-    } else {
-      isChecking?.change(false);
-      isHandsUp?.change(false);
+  Future<bool> signInWithEmail(BuildContext context) async {
+    if (!formKey.currentState!.validate()) {
       trigFail?.change(true);
+      return false;
+    }
+
+    try {
+      isChecking?.change(true);
+      isHandsUp?.change(false);
       trigSuccess?.change(false);
+      trigFail?.change(false);
+
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: usernameController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
+      trigSuccess?.change(true);
+      showToast(
+        context,
+        "Login",
+        'Login Successful',
+        ToastificationType.success,
+      );
+      return true;
+    } on FirebaseAuthException catch (e) {
+      print("Login error: ${e.code} - ${e.message}");
+
+      trigFail?.change(true);
+
+      // Pass the error reason to the showToast method
+      String errorMessage = e.message ?? 'Login failed';
+
+      showToast(
+        context,
+        "Login Failed",
+        errorMessage,
+        ToastificationType.error,
+      );
+
+      return false;
+    } finally {
+      isChecking?.change(false);
+      isHandsUp?.change(false);
     }
   }
 

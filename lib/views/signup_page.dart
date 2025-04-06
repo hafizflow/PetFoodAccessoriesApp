@@ -120,7 +120,8 @@ class RiveSignUpPage extends StatelessWidget {
                               color: Colors.teal,
                             ),
                             child: InkWell(
-                              onTap: signUpProvider.validateForm,
+                              onTap:
+                                  () => signUpProvider.signUpWithEmail(context),
                               child: Center(
                                 child: Text(
                                   "Sign Up",

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "922429960602",
+    "project_id": "pawmart-32ea2",
+    "storage_bucket": "pawmart-32ea2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922429960602:android:1bac32f0004fa393500a23",
+        "android_client_info": {
+          "package_name": "com.example.pet_food_accessories_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYrtBJj8msP1LaIucwDr6ScOkh4dLnvBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

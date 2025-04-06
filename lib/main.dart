@@ -1,7 +1,9 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pet_food_accessories_app/app.dart';
+import 'package:pet_food_accessories_app/firebase_options.dart';
 import 'package:pet_food_accessories_app/providers/bottom_nav_provider.dart';
 import 'package:pet_food_accessories_app/providers/login_provider.dart';
 import 'package:pet_food_accessories_app/providers/product_detail_provider.dart';
@@ -9,7 +11,10 @@ import 'package:pet_food_accessories_app/providers/signup_provider.dart';
 import 'package:pet_food_accessories_app/routers/route_generator.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(
     MultiProvider(
       providers: [

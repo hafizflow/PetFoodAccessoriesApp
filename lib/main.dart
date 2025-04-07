@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:pet_food_accessories_app/app.dart';
 import 'package:pet_food_accessories_app/firebase_options.dart';
 import 'package:pet_food_accessories_app/providers/bottom_nav_provider.dart';
+import 'package:pet_food_accessories_app/providers/cart_provider.dart';
 import 'package:pet_food_accessories_app/providers/login_provider.dart';
 import 'package:pet_food_accessories_app/providers/product_detail_provider.dart';
 import 'package:pet_food_accessories_app/providers/signup_provider.dart';
@@ -22,6 +23,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ProductDetailProvider()),
         ChangeNotifierProvider(create: (_) => SignUpProvider()),
         ChangeNotifierProvider(create: (_) => LoginProvider()),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
       ],
 
       child: DevicePreview(

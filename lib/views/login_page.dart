@@ -146,18 +146,31 @@ class RiveLoginPage extends StatelessWidget {
                               color: Colors.teal,
                             ),
                             child: InkWell(
-                              onTap: () {
-                                loginProvider.signInWithEmail(context);
-                              },
+                              onTap:
+                                  loginProvider.isLoading
+                                      ? null
+                                      : () => loginProvider.signInWithEmail(
+                                        context,
+                                      ),
                               child: Center(
-                                child: Text(
-                                  "Login",
-                                  style: GoogleFonts.quicksand(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                  ),
-                                ),
+                                child:
+                                    loginProvider.isLoading
+                                        ? const SizedBox(
+                                          height: 25,
+                                          width: 25,
+                                          child: CircularProgressIndicator(
+                                            color: Colors.white,
+                                            strokeWidth: 3,
+                                          ),
+                                        )
+                                        : Text(
+                                          "Login",
+                                          style: GoogleFonts.quicksand(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                               ),
                             ),
                           ),

@@ -1,12 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
-import 'package:pet_food_accessories_app/routers/app_routers.dart';
+import 'package:pet_food_accessories_app/providers/login_provider.dart';
 import 'package:pet_food_accessories_app/widgets/appbar_text.dart';
+import 'package:pet_food_accessories_app/widgets/have_to_login.dart';
 import 'package:pet_food_accessories_app/widgets/heading.dart';
 import 'package:pet_food_accessories_app/widgets/profile_image_picker.dart';
 import 'package:pet_food_accessories_app/widgets/scratcher.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -14,149 +17,160 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController address = TextEditingController();
+    final LoginProvider loginProvider = Provider.of<LoginProvider>(context);
 
-    return Scaffold(
-      appBar: AppBar(title: AppBarText(title: 'My Profile'), centerTitle: true),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-        child: ListView(
-          children: [
-            ProfileImagePicker(),
-            const SizedBox(height: 20),
-            Center(
-              child: Text(
-                'Change Your Profile Picture',
-                style: GoogleFonts.quicksand(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey[600],
-                ),
+    return StreamBuilder(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(color: Colors.teal),
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text(
+              'Something went wrong',
+              style: GoogleFonts.quicksand(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.red[400],
               ),
             ),
-            const SizedBox(height: 40),
-            HHeading(
-              title: 'Profile Information',
-              isSeeAll: false,
-              titleFontSize: 20,
+          );
+        } else if (snapshot.hasData) {
+          return Scaffold(
+            appBar: AppBar(
+              title: AppBarText(title: 'My Profile'),
+              centerTitle: true,
             ),
-            SizedBox(height: 18),
-            profileInformation(context, address),
-            Divider(color: Colors.grey[300], thickness: 1, height: 50),
-            HHeading(
-              title: 'Other Information',
-              isSeeAll: false,
-              titleFontSize: 20,
-            ),
-            const SizedBox(height: 16),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: Icon(Iconsax.code_1_copy),
-              trailing: Icon(Icons.arrow_forward_ios, size: 16),
-              title: Text(
-                'Promo Code',
-                style: GoogleFonts.quicksand(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text(
-                        'Promo Code',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.quicksand(
-                          fontWeight: FontWeight.w600,
-                        ),
+            body: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+              child: ListView(
+                children: [
+                  ProfileImagePicker(),
+                  const SizedBox(height: 20),
+                  Center(
+                    child: Text(
+                      'Change Your Profile Picture',
+                      style: GoogleFonts.quicksand(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey[600],
                       ),
-                      content: HScratcher(),
-
-                      actions: [
-                        InkWell(
-                          onTap: () => Navigator.of(context).pop(),
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Colors.teal,
-                              borderRadius: BorderRadius.circular(32),
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  HHeading(
+                    title: 'Profile Information',
+                    isSeeAll: false,
+                    titleFontSize: 20,
+                  ),
+                  SizedBox(height: 18),
+                  profileInformation(context, address),
+                  Divider(color: Colors.grey[300], thickness: 1, height: 50),
+                  HHeading(
+                    title: 'Other Information',
+                    isSeeAll: false,
+                    titleFontSize: 20,
+                  ),
+                  const SizedBox(height: 16),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: Icon(Iconsax.code_1_copy),
+                    trailing: Icon(Icons.arrow_forward_ios, size: 16),
+                    title: Text(
+                      'Promo Code',
+                      style: GoogleFonts.quicksand(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(
+                              'Promo Code',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.quicksand(
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Done',
-                                  style: GoogleFonts.quicksand(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
+                            content: HScratcher(),
+
+                            actions: [
+                              InkWell(
+                                onTap: () => Navigator.of(context).pop(),
+                                child: Container(
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    color: Colors.teal,
+                                    borderRadius: BorderRadius.circular(32),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Done',
+                                        style: GoogleFonts.quicksand(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-            ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  ),
 
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: Icon(Iconsax.logout_copy),
-              trailing: Icon(Icons.arrow_forward_ios, size: 16),
-              title: Text(
-                'Logout',
-                style: GoogleFonts.quicksand(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: Icon(Iconsax.logout_copy),
+                    trailing: Icon(Icons.arrow_forward_ios, size: 16),
+                    title: Text(
+                      'Logout',
+                      style: GoogleFonts.quicksand(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    onTap: () {
+                      PanaraConfirmDialog.show(
+                        context,
+                        title: "Are you sure?",
+                        message: "Do you want to logout?",
+                        confirmButtonText: "Logout",
+                        cancelButtonText: "Cancel",
+                        onTapCancel: () => Navigator.pop(context),
+                        onTapConfirm: () {
+                          loginProvider.logout(context);
+                          Navigator.pop(context);
+                        },
+                        panaraDialogType: PanaraDialogType.error,
+                      );
+                    },
+                  ),
+                ],
               ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              onTap: () {
-                PanaraConfirmDialog.show(
-                  context,
-                  title: "Are you sure?",
-                  message: "Do you want to logout?",
-                  confirmButtonText: "Logout",
-                  cancelButtonText: "Cancel",
-                  onTapCancel: () => Navigator.pop(context),
-                  onTapConfirm: () => Navigator.pop(context),
-                  panaraDialogType: PanaraDialogType.error,
-                );
-              },
             ),
-
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: Icon(Iconsax.login_copy),
-              trailing: Icon(Icons.arrow_forward_ios, size: 16),
-              tileColor: Colors.red[100],
-              title: Text(
-                'Login',
-                style: GoogleFonts.quicksand(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.login);
-              },
-            ),
-          ],
-        ),
-      ),
+          );
+        } else {
+          return HaveToLogin(text: ' to see your profile');
+        }
+      },
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_food_accessories_app/routers/app_routers.dart';
 import 'package:pet_food_accessories_app/widgets/toast.dart';
 import 'package:rive/rive.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,6 +18,7 @@ class LoginProvider extends ChangeNotifier {
   StateMachineController? stateMachineController;
 
   bool isPasswordVisible = false;
+  bool isLoading = false;
 
   void initializeRive(Artboard artBoard) {
     stateMachineController = StateMachineController.fromArtboard(
@@ -61,6 +63,20 @@ class LoginProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Signout function
+  Future<void> logout(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.signOut();
+    } catch (e) {
+      showToast(
+        context,
+        "Logout Failed",
+        e.toString(),
+        ToastificationType.error,
+      );
+    }
+  }
+
   Future<bool> signInWithEmail(BuildContext context) async {
     if (!formKey.currentState!.validate()) {
       trigFail?.change(true);
@@ -68,6 +84,9 @@ class LoginProvider extends ChangeNotifier {
     }
 
     try {
+      isLoading = true;
+      notifyListeners();
+
       isChecking?.change(true);
       isHandsUp?.change(false);
       trigSuccess?.change(false);
@@ -78,26 +97,37 @@ class LoginProvider extends ChangeNotifier {
         password: passwordController.text.trim(),
       );
 
+      // Trigger success animation
       trigSuccess?.change(true);
+
+      // Show success toast
       showToast(
         context,
         "Login",
         'Login Successful',
         ToastificationType.success,
       );
+
+      // Wait for 1 second to let the animation play
+      await Future.delayed(const Duration(seconds: 1));
+
+      // Then navigate to home
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        AppRoutes.home,
+        (route) => false,
+      );
+
+      usernameController.clear();
+      passwordController.clear();
       return true;
     } on FirebaseAuthException catch (e) {
-      print("Login error: ${e.code} - ${e.message}");
-
       trigFail?.change(true);
-
-      // Pass the error reason to the showToast method
-      String errorMessage = e.message ?? 'Login failed';
 
       showToast(
         context,
         "Login Failed",
-        errorMessage,
+        e.message ?? 'Login failed',
         ToastificationType.error,
       );
 
@@ -105,6 +135,8 @@ class LoginProvider extends ChangeNotifier {
     } finally {
       isChecking?.change(false);
       isHandsUp?.change(false);
+      isLoading = false;
+      notifyListeners();
     }
   }
 

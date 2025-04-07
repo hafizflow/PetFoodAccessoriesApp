@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_food_accessories_app/routers/app_routers.dart';
+import 'package:pet_food_accessories_app/widgets/appbar_text.dart';
 import 'package:pet_food_accessories_app/widgets/cart_item.dart';
+import 'package:pet_food_accessories_app/widgets/my_custom_button.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -12,13 +14,7 @@ class CartPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'My Cart Items',
-          style: GoogleFonts.quicksand(
-            fontSize: 24,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        title: AppBarText(title: 'My Cart'),
         centerTitle: true,
         backgroundColor: Colors.transparent,
       ),
@@ -79,31 +75,37 @@ class CartPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(width: 24),
-              Flexible(
-                child: InkWell(
-                  onTap: () => Navigator.pushNamed(context, AppRoutes.checkout),
-                  child: Container(
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.teal,
-                      borderRadius: BorderRadius.circular(32),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Proceed to Checkout',
-                          style: GoogleFonts.quicksand(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+              MyCustomButton(
+                text: 'Proceed to Checkout',
+                onTap: () {
+                  Navigator.pushNamed(context, AppRoutes.checkout);
+                },
               ),
+              // Flexible(
+              //   child: InkWell(
+              //     onTap: () => Navigator.pushNamed(context, AppRoutes.checkout),
+              //     child: Container(
+              //       padding: const EdgeInsets.symmetric(vertical: 16),
+              //       decoration: BoxDecoration(
+              //         color: Colors.teal,
+              //         borderRadius: BorderRadius.circular(32),
+              //       ),
+              //       child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.center,
+              //         children: [
+              //           Text(
+              //             'Proceed to Checkout',
+              //             style: GoogleFonts.quicksand(
+              //               color: Colors.white,
+              //               fontSize: 18,
+              //               fontWeight: FontWeight.w600,
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:pet_food_accessories_app/routers/app_routers.dart';
+import 'package:pet_food_accessories_app/widgets/appbar_text.dart';
 import 'package:pet_food_accessories_app/widgets/heading.dart';
 import 'package:pet_food_accessories_app/widgets/profile_image_picker.dart';
 import 'package:pet_food_accessories_app/widgets/scratcher.dart';
@@ -15,16 +16,7 @@ class ProfilePage extends StatelessWidget {
     final TextEditingController address = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "My Profile",
-          style: GoogleFonts.quicksand(
-            fontSize: 24,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: AppBarText(title: 'My Profile'), centerTitle: true),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
         child: ListView(

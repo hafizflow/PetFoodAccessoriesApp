@@ -3,9 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:pet_food_accessories_app/providers/login_provider.dart';
 import 'package:pet_food_accessories_app/routers/app_routers.dart';
+import 'package:pet_food_accessories_app/widgets/appbar_text.dart';
 import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
-import 'package:toastification/toastification.dart';
 
 class RiveLoginPage extends StatelessWidget {
   const RiveLoginPage({super.key});
@@ -15,16 +15,7 @@ class RiveLoginPage extends StatelessWidget {
     final loginProvider = Provider.of<LoginProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Login",
-          style: GoogleFonts.quicksand(
-            fontSize: 24,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: AppBarText(title: 'Login'), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 32),
         child: SingleChildScrollView(

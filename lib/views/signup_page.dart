@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:pet_food_accessories_app/providers/signup_provider.dart';
+import 'package:pet_food_accessories_app/widgets/appbar_text.dart';
 import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
 
@@ -14,13 +15,7 @@ class RiveSignUpPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Sign Up",
-          style: GoogleFonts.quicksand(
-            fontSize: 24,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        title: const AppBarText(title: 'Sign Up'),
         centerTitle: true,
       ),
       body: Padding(

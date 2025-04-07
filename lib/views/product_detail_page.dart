@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_food_accessories_app/providers/product_detail_provider.dart';
+import 'package:pet_food_accessories_app/widgets/my_custom_button.dart';
 import 'package:provider/provider.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
@@ -42,34 +43,7 @@ class ProductDetailPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(width: 24),
-              Flexible(
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.teal,
-                    borderRadius: BorderRadius.circular(32),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Iconsax.shopping_cart,
-                        color: Colors.white,
-                        size: 22,
-                      ),
-                      const SizedBox(width: 16),
-                      Text(
-                        'Add to Cart',
-                        style: GoogleFonts.quicksand(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              MyCustomButton(text: 'Add to Cart', icon: Iconsax.shopping_cart),
             ],
           ),
         ),

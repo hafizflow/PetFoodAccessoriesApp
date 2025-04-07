@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:pet_food_accessories_app/widgets/animated_button.dart';
+import 'package:pet_food_accessories_app/widgets/appbar_text.dart';
 import 'package:pet_food_accessories_app/widgets/cart_item.dart';
 import 'package:pet_food_accessories_app/widgets/heading.dart';
 
@@ -13,13 +14,7 @@ class CheckoutPage extends StatelessWidget {
     final TextEditingController promoCode = TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Checkout',
-          style: GoogleFonts.quicksand(
-            fontSize: 24,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        title: const AppBarText(title: 'Checkout'),
         centerTitle: true,
         backgroundColor: Colors.transparent,
       ),

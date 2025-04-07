@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_food_accessories_app/routers/app_routers.dart';
+import 'package:pet_food_accessories_app/widgets/appbar_text.dart';
 import 'package:pet_food_accessories_app/widgets/prduct_card.dart';
 
 class WishListPage extends StatelessWidget {
@@ -12,13 +12,7 @@ class WishListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'My Wish List',
-          style: GoogleFonts.quicksand(
-            fontSize: 24,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        title: AppBarText(title: 'Wish List'),
         centerTitle: true,
         backgroundColor: Colors.transparent,
       ),

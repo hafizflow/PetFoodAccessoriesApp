@@ -39,7 +39,7 @@ class _HCarouselState extends State<HCarousel> {
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: CachedNetworkImage(
-                  imageUrl: 'https://picsum.photos/400?random=$index',
+                  imageUrl: 'https://picsum.photos/300?random=$index',
                   fit: BoxFit.cover,
                   placeholder:
                       (context, url) => Shimmer.fromColors(

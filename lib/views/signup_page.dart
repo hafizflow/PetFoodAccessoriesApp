@@ -59,20 +59,8 @@ class RiveSignUpPage extends StatelessWidget {
                           buildTextField(
                             onChange: signUpProvider.moveEyeBall,
                             onTap: signUpProvider.isCheckField,
-                            controller: signUpProvider.emailController,
-                            hintText: "Email",
-                            icon: Icons.mail_rounded,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Enter a valid email";
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 15),
-                          buildTextField(
-                            onChange: signUpProvider.moveEyeBall,
-                            onTap: signUpProvider.isCheckField,
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.name,
                             controller: signUpProvider.usernameController,
                             hintText: "Username",
                             icon: Iconsax.user,
@@ -86,7 +74,26 @@ class RiveSignUpPage extends StatelessWidget {
                           const SizedBox(height: 15),
                           buildTextField(
                             onChange: signUpProvider.moveEyeBall,
+                            onTap: signUpProvider.isCheckField,
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.emailAddress,
+                            controller: signUpProvider.emailController,
+                            hintText: "Email",
+                            icon: Icons.mail_rounded,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Enter a valid email";
+                              }
+                              return null;
+                            },
+                          ),
+
+                          const SizedBox(height: 15),
+                          buildTextField(
+                            onChange: signUpProvider.moveEyeBall,
                             onTap: signUpProvider.hidePassword,
+                            textInputAction: TextInputAction.done,
+                            keyboardType: TextInputType.visiblePassword,
                             controller: signUpProvider.passwordController,
                             hintText: "Password",
                             icon: Iconsax.lock,
@@ -176,11 +183,15 @@ class RiveSignUpPage extends StatelessWidget {
     bool obscureText = false,
     Widget? suffixIcon,
     String? Function(String?)? validator,
+    TextInputType? keyboardType,
+    TextInputAction? textInputAction,
   }) {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
       cursorColor: Colors.teal,
+      keyboardType: keyboardType,
+      textInputAction: textInputAction,
       onTap: onTap,
       onChanged: onChange,
       decoration: InputDecoration(

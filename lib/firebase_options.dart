@@ -71,4 +71,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'pawmart-32ea2.firebasestorage.app',
     iosBundleId: 'com.example.petFoodAccessoriesApp',
   );
+
 }

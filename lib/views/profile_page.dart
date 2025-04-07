@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:pet_food_accessories_app/providers/login_provider.dart';
+import 'package:pet_food_accessories_app/services/auth_services.dart';
 import 'package:pet_food_accessories_app/widgets/appbar_text.dart';
 import 'package:pet_food_accessories_app/widgets/have_to_login.dart';
 import 'package:pet_food_accessories_app/widgets/heading.dart';
@@ -16,7 +17,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController address = TextEditingController();
+    final TextEditingController addressController = TextEditingController();
     final LoginProvider loginProvider = Provider.of<LoginProvider>(context);
 
     return StreamBuilder(
@@ -66,7 +67,7 @@ class ProfilePage extends StatelessWidget {
                     titleFontSize: 20,
                   ),
                   SizedBox(height: 18),
-                  profileInformation(context, address),
+                  profileInformation(context, addressController),
                   Divider(color: Colors.grey[300], thickness: 1, height: 50),
                   HHeading(
                     title: 'Other Information',
@@ -176,63 +177,90 @@ class ProfilePage extends StatelessWidget {
 
   Column profileInformation(
     BuildContext context,
-    TextEditingController address,
+    TextEditingController addressController,
   ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       spacing: 12,
       children: [
-        Row(
-          children: [
-            SizedBox(
-              width: 80,
-              child: Text(
-                'Name:',
-                style: GoogleFonts.quicksand(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey[600],
+        FutureBuilder<Map<String, dynamic>?>(
+          future: AuthService().getUserProfile(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            }
+
+            if (snapshot.hasError || !snapshot.hasData) {
+              return Text(
+                'Failed to load user data',
+                style: GoogleFonts.quicksand(fontSize: 16),
+              );
+            }
+
+            final data = snapshot.data!;
+            final name = data['username'] ?? 'No Name';
+            final email = data['email'] ?? 'No Email';
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 80,
+                      child: Text(
+                        'Name:',
+                        style: GoogleFonts.quicksand(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        name,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.quicksand(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-            Expanded(
-              child: Text(
-                'Hafizur Rahman',
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.quicksand(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 80,
+                      child: Text(
+                        'Email:',
+                        style: GoogleFonts.quicksand(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        email,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.quicksand(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-          ],
+              ],
+            );
+          },
         ),
-        Row(
-          children: [
-            SizedBox(
-              width: 80,
-              child: Text(
-                'Email:',
-                style: GoogleFonts.quicksand(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey[600],
-                ),
-              ),
-            ),
-            Expanded(
-              child: Text(
-                'rahman15-5678@diu.edu.bd',
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.quicksand(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ],
-        ),
+
         Row(
           children: [
             SizedBox(
@@ -248,15 +276,38 @@ class ProfilePage extends StatelessWidget {
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.3,
-              child: Text(
-                'Savar, Dhaka, Bangladesh',
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.quicksand(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+              child: FutureBuilder<String?>(
+                future: AuthService().getAddress(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  }
+
+                  if (snapshot.hasError ||
+                      !snapshot.hasData ||
+                      snapshot.data!.isEmpty) {
+                    return Text(
+                      'No address found',
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.quicksand(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    );
+                  }
+
+                  return Text(
+                    snapshot.data!,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.quicksand(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  );
+                },
               ),
             ),
+
             Spacer(),
             GestureDetector(
               onTap: () {
@@ -283,7 +334,7 @@ class ProfilePage extends StatelessWidget {
                             ),
                             SizedBox(height: 16),
                             TextFormField(
-                              controller: address,
+                              controller: addressController,
                               style: const TextStyle(fontSize: 15),
                               cursorColor: Colors.teal,
                               keyboardType: TextInputType.emailAddress,
@@ -353,6 +404,10 @@ class ProfilePage extends StatelessWidget {
                                 Flexible(
                                   child: InkWell(
                                     onTap: () {
+                                      AuthService().updateAddress(
+                                        addressController.text,
+                                      );
+                                      addressController.clear();
                                       Navigator.pop(context);
                                       ScaffoldMessenger.of(
                                         context,

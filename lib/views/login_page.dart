@@ -57,7 +57,7 @@ class RiveLoginPage extends StatelessWidget {
                           TextFormField(
                             onChanged: loginProvider.moveEyeBall,
                             onTap: loginProvider.isCheckField,
-                            controller: loginProvider.usernameController,
+                            controller: loginProvider.emailController,
                             style: const TextStyle(fontSize: 15),
                             cursorColor: Colors.teal,
                             keyboardType: TextInputType.emailAddress,

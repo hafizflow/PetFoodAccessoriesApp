@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:pet_food_accessories_app/app.dart';
 import 'package:pet_food_accessories_app/firebase_options.dart';
 import 'package:pet_food_accessories_app/providers/bottom_nav_provider.dart';
+import 'package:pet_food_accessories_app/providers/carousel_provider.dart';
 import 'package:pet_food_accessories_app/providers/cart_provider.dart';
 import 'package:pet_food_accessories_app/providers/login_provider.dart';
 import 'package:pet_food_accessories_app/providers/product_detail_provider.dart';
@@ -27,17 +28,18 @@ void main() async {
         ChangeNotifierProvider(create: (_) => SignUpProvider()),
         ChangeNotifierProvider(create: (_) => LoginProvider()),
         ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => CarouselProvider()),
       ],
 
-      child: DevicePreview(
-        enabled: true,
-        storage: DevicePreviewStorage.none(),
-        defaultDevice: Devices.ios.iPhone12ProMax,
-        builder: (context) {
-          return const MyApp();
-        },
-      ),
-      // child: const MyApp(),
+      // child: DevicePreview(
+      //   enabled: true,
+      //   storage: DevicePreviewStorage.none(),
+      //   defaultDevice: Devices.ios.iPhone12ProMax,
+      //   builder: (context) {
+      //     return const MyApp();
+      //   },
+      // ),
+      child: const MyApp(),
     ),
   );
 }

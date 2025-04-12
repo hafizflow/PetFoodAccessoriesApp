@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:like_button/like_button.dart';
+import 'package:pet_food_accessories_app/model/product_model.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key, this.index});
+  final Product product;
 
-  final int? index;
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -35,19 +36,16 @@ class ProductCard extends StatelessWidget {
                   color: Colors.grey[200],
                 ),
                 child: Center(
-                  child:
-                      index == null
-                          ? Image.asset("assets/hii.png", fit: BoxFit.cover)
-                          : Hero(
-                            tag: 'product$index',
-                            child: Image.asset(
-                              "assets/hii.png",
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                  child: Hero(
+                    tag: 'product${product.id}',
+                    child: Image.network(
+                      product.imageUrl.first,
+                      fit: BoxFit.cover,
+                      height: 140,
+                    ),
+                  ),
                 ),
               ),
-
               Positioned(top: 8, right: 6, child: LikeButton(size: 24)),
             ],
           ),
@@ -63,7 +61,7 @@ class ProductCard extends StatelessWidget {
                     SizedBox(
                       width: 80,
                       child: Text(
-                        "NutriNosh Dog Food",
+                        product.name,
                         style: GoogleFonts.quicksand(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -77,8 +75,8 @@ class ProductCard extends StatelessWidget {
                         const Icon(Iconsax.star, color: Colors.amber, size: 16),
                         const SizedBox(width: 4),
                         Text(
-                          "4.9",
-                          style: TextStyle(
+                          product.rating.toString(),
+                          style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                           ),
@@ -89,23 +87,23 @@ class ProductCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  "Dog Food",
+                  product.category,
                   style: GoogleFonts.quicksand(
                     fontSize: 12,
                     color: Colors.grey,
                   ),
-                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  "\$30.00",
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  "\$${product.price.toStringAsFixed(2)}",
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
           ),
-
-          // const SizedBox(height: 8),
         ],
       ),
     );

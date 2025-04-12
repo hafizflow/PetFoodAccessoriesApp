@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pet_food_accessories_app/model/product_model.dart';
+import 'package:pet_food_accessories_app/views/all_product_page.dart';
+import 'package:pet_food_accessories_app/views/category_product_page.dart';
 import 'package:pet_food_accessories_app/views/checkout_page.dart';
 import 'package:pet_food_accessories_app/views/home_page.dart';
 import 'package:pet_food_accessories_app/views/login_page.dart';
@@ -12,9 +15,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const HomePage());
 
       case '/product_detail':
-        int productId = settings.arguments as int;
+        Product product = settings.arguments as Product;
         return MaterialPageRoute(
-          builder: (_) => ProductDetailPage(productId: productId),
+          builder: (_) => ProductDetailPage(product: product),
         );
 
       case '/signup':
@@ -25,6 +28,15 @@ class RouteGenerator {
 
       case '/checkout':
         return MaterialPageRoute(builder: (_) => const CheckoutPage());
+
+      case '/category':
+        String category = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => CategoryProductsPage(category: category),
+        );
+
+      case '/all_products':
+        return MaterialPageRoute(builder: (_) => const AllProductPage());
 
       default:
         return _errorRoute();

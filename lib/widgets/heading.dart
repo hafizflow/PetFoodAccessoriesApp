@@ -7,10 +7,12 @@ class HHeading extends StatelessWidget {
     required this.title,
     this.isSeeAll = true,
     this.titleFontSize = 24,
+    this.onPressed,
   });
   final String title;
   final bool isSeeAll;
   final double titleFontSize;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +29,7 @@ class HHeading extends StatelessWidget {
         const Spacer(),
         if (isSeeAll)
           TextButton(
-            onPressed: () {
-              // Perform action on tap
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text('$title button clicked')));
-            },
+            onPressed: onPressed,
             child: Text(
               'See All',
               style: GoogleFonts.quicksand(

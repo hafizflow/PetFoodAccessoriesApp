@@ -37,7 +37,7 @@ class CartItem extends StatelessWidget {
               ),
             ),
             child: Center(
-              child: Image.asset("assets/1.png", fit: BoxFit.cover),
+              child: Image.asset("assets/dog1.png", fit: BoxFit.cover),
             ),
           ),
           const SizedBox(width: 16),

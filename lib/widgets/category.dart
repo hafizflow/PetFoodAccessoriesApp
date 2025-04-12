@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_food_accessories_app/routers/app_routers.dart';
 
 class HCategory extends StatelessWidget {
   const HCategory({super.key});
@@ -13,7 +14,7 @@ class HCategory extends StatelessWidget {
           children: [
             CategoryItem(imagePath: 'assets/dog.png', label: 'Dog'),
             CategoryItem(imagePath: 'assets/cat.png', label: 'Cat'),
-            CategoryItem(imagePath: 'assets/bird.png', label: 'Birds'),
+            CategoryItem(imagePath: 'assets/bird.png', label: 'Bird'),
             CategoryItem(imagePath: 'assets/fish.png', label: 'Fish'),
           ],
         ),
@@ -34,9 +35,7 @@ class CategoryItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       splashColor: Colors.teal.withAlpha(50),
       onTap: () {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('$label clicked')));
+        Navigator.pushNamed(context, AppRoutes.category, arguments: label);
       },
       child: Column(
         children: [

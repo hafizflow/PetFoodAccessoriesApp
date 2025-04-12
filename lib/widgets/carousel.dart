@@ -33,7 +33,7 @@ class _HCarouselState extends State<HCarousel> {
     if (carouselProvider.isLoading) {
       return const SizedBox(
         height: 180,
-        child: Center(child: CircularProgressIndicator()),
+        child: Center(child: CircularProgressIndicator(color: Colors.teal)),
       );
     }
 

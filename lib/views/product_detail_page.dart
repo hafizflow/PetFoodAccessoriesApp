@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_food_accessories_app/model/product_model.dart';
 import 'package:pet_food_accessories_app/providers/product_detail_provider.dart';
 import 'package:pet_food_accessories_app/widgets/my_custom_button.dart';
 import 'package:provider/provider.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  const ProductDetailPage({super.key, this.productId});
+  const ProductDetailPage({super.key, required this.product});
 
-  final int? productId;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class ProductDetailPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '\$30.00',
+                    '\$${product.price}',
                     style: GoogleFonts.quicksand(
                       fontSize: 18,
                       fontWeight: FontWeight.w800,
@@ -64,37 +65,36 @@ class ProductDetailPage extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(horizontal: 16),
                     width: double.infinity,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      spacing: 16,
                       children: [
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.35,
-                          child: PageView(
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          child: PageView.builder(
                             controller: productProvider.pageController,
                             onPageChanged:
                                 (index) => productProvider.setPage(index),
-                            children:
-                                productProvider.images.map((image) {
-                                  return productId != null
-                                      ? Hero(
-                                        transitionOnUserGestures: true,
-                                        tag: 'product$productId',
-                                        child: Image.asset(
-                                          image,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      )
-                                      : Image.asset(image, fit: BoxFit.contain);
-                                }).toList(),
+                            itemCount: product.imageUrl.length,
+                            itemBuilder: (context, index) {
+                              final image = product.imageUrl[index];
+                              return Hero(
+                                tag: 'product${product.id}',
+                                child: Image.network(
+                                  image,
+                                  fit: BoxFit.contain,
+                                ),
+                              );
+                            },
                           ),
                         ),
-                        // Thumbnails Row
+
+                        // Thumbnails
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children:
-                              productProvider.images.asMap().entries.map((
-                                entry,
-                              ) {
-                                int index = entry.key;
-                                String image = entry.value;
+                              product.imageUrl.asMap().entries.map((entry) {
+                                final index = entry.key;
+                                final image = entry.value;
                                 return GestureDetector(
                                   onTap: () => productProvider.setPage(index),
                                   child: Container(
@@ -115,7 +115,7 @@ class ProductDetailPage extends StatelessWidget {
                                         width: 2,
                                       ),
                                     ),
-                                    child: Image.asset(
+                                    child: Image.network(
                                       image,
                                       fit: BoxFit.cover,
                                     ),
@@ -126,16 +126,16 @@ class ProductDetailPage extends StatelessWidget {
                       ],
                     ),
                   ),
+
                   // Back Button
                   Positioned(
                     top: 10,
                     left: 32,
                     child: InkWell(
                       onTap: () => Navigator.pop(context),
-                      child: CircleAvatar(
+                      child: const CircleAvatar(
                         backgroundColor: Colors.white,
-
-                        child: const Icon(
+                        child: Icon(
                           Icons.arrow_back,
                           size: 24,
                           color: Colors.black,
@@ -144,56 +144,52 @@ class ProductDetailPage extends StatelessWidget {
                     ),
                   ),
 
-                  // Share Button
+                  // Heart + Share Buttons
                   Positioned(
                     top: 10,
                     right: 32,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      child: InkWell(
-                        onTap: () {
-                          // Add share functionality
-                        },
-                        child: const Icon(
-                          Icons.share_outlined,
-                          size: 24,
-                          color: Colors.black,
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: InkWell(
+                            onTap: () {},
+                            child: const Icon(
+                              Iconsax.heart,
+                              size: 24,
+                              color: Colors.red,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                  // Heart Button
-                  Positioned(
-                    top: 10,
-                    right: 82,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      child: InkWell(
-                        onTap: () {
-                          // Add like functionality
-                        },
-                        child: const Icon(
-                          Iconsax.heart,
-                          size: 24,
-                          color: Colors.red,
+                        const SizedBox(width: 8),
+                        CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: InkWell(
+                            onTap: () {},
+                            child: const Icon(
+                              Icons.share_outlined,
+                              size: 24,
+                              color: Colors.black,
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ],
               ),
             ),
 
-            //! Product Details
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Category and Rating
                   Row(
                     children: [
                       Text(
-                        'Dog Food',
+                        product.category,
                         style: GoogleFonts.quicksand(
                           color: Colors.grey[500],
                           fontWeight: FontWeight.w600,
@@ -204,7 +200,7 @@ class ProductDetailPage extends StatelessWidget {
                       Icon(Iconsax.star, color: Colors.amber[600], size: 20),
                       const SizedBox(width: 4),
                       Text(
-                        '4.9',
+                        product.rating.toString(),
                         style: GoogleFonts.quicksand(
                           color: Colors.grey[500],
                           fontWeight: FontWeight.w600,
@@ -216,7 +212,7 @@ class ProductDetailPage extends StatelessWidget {
 
                   const SizedBox(height: 8),
                   Text(
-                    'Natural Dog Food',
+                    product.name,
                     style: GoogleFonts.quicksand(
                       fontSize: 22,
                       fontWeight: FontWeight.w600,
@@ -235,18 +231,7 @@ class ProductDetailPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                    'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-                    'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                    'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-                    'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                    'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-                    'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                    'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-                    'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                    product.description,
                     style: GoogleFonts.quicksand(
                       fontSize: 14,
                       color: Colors.grey[600],

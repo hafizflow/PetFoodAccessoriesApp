@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,15 +37,15 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AllProductProvider()),
       ],
 
-      // child: DevicePreview(
-      //   enabled: true,
-      //   storage: DevicePreviewStorage.none(),
-      //   defaultDevice: Devices.ios.iPhone12ProMax,
-      //   builder: (context) {
-      //     return const MyApp();
-      //   },
-      // ),
-      child: const MyApp(),
+      child: DevicePreview(
+        enabled: true,
+        storage: DevicePreviewStorage.none(),
+        defaultDevice: Devices.ios.iPhone12ProMax,
+        builder: (context) {
+          return const MyApp();
+        },
+      ),
+      // child: const MyApp(),
     ),
   );
 }

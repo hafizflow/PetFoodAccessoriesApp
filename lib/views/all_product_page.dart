@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pet_food_accessories_app/providers/all_product_provider.dart';
-import 'package:pet_food_accessories_app/widgets/appbar.dart';
 import 'package:pet_food_accessories_app/widgets/appbar_text.dart';
 import 'package:pet_food_accessories_app/widgets/prduct_card.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +35,9 @@ class _AllProductPageState extends State<AllProductPage> {
       ),
       body:
           provider.isLoading
-              ? const Center(child: CircularProgressIndicator())
+              ? const Center(
+                child: CircularProgressIndicator(color: Colors.teal),
+              )
               : GridView.builder(
                 padding: const EdgeInsets.all(16),
                 itemCount: provider.allProducts.length,

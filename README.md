@@ -1,16 +1,8 @@
 # pet_food_accessories_app
 
-A new Flutter project.
+### UI Figma Link: 
+https://www.figma.com/proto/ThMNgGInceRce39ZOuy69e/Untitled?node-id=20-59&t=w6ghjWrbFj7MzWE4-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![WhatsApp Image 2025-04-13 at 18 59 50](https://github.com/user-attachments/assets/948e3e4c-b3c0-478b-84a8-93805b0d0c42)
